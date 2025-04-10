@@ -5,115 +5,282 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Music For Patients</title>
   <style>
+    /* ===== COLORS ===== */
+    :root {
+      --primary-color: #40798C;     /* deep teal-blue for header/nav */
+      --accent-color: #FF6F61;      /* coral accent */
+      --background-color: #f9f9f9;
+      --text-color: #333;
+      --white: #fff;
+    }
+
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background-color: #f9f9f9;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
     }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== HEADER & NAV ===== */
     header {
-      background-color: #40798C;
-      color: white;
-      padding: 40px 20px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      padding: 2rem;
       text-align: center;
     }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
+    header h1 {
+      font-size: 2.5rem;
     }
-    .team, .testimonials, .gallery {
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    nav {
+      background: var(--primary-color);
+    }
+    /* Main nav container */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 0.5rem;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .navbar li {
+      position: relative;
+      padding: 0.5rem 1rem;
+    }
+    .navbar a {
+      color: var(--white);
+      font-weight: bold;
+      padding: 0.5rem;
+    }
+    .navbar li:hover {
+      background: rgba(0,0,0,0.1);
+    }
+    /* Dropdown Menu */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--white);
+      min-width: 160px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: var(--text-color);
+      padding: 0.5rem 1rem;
+      display: block;
+      text-align: left;
+    }
+    .dropdown-content a:hover {
+      background-color: #eee;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+      top: 100%;
+      left: 0;
+    }
+
+    /* ===== MAIN SECTIONS ===== */
+    section {
+      padding: 3rem 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-title {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .content {
+      margin-bottom: 2rem;
+    }
+    /* Placeholder image container */
+    .placeholder {
+      width: 100%;
+      height: 200px;
+      background: #ddd;
+      border: 2px dashed #ccc;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+    }
+
+    /* ===== GRID LAYOUTS FOR TEAM, TESTIMONIALS, & GALLERY ===== */
+    .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      gap: 1.5rem;
     }
     .card {
-      background: white;
-      padding: 20px;
+      background: var(--white);
+      padding: 1.5rem;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    form input, form textarea {
+
+    /* ===== CONTACT FORM ===== */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-form input,
+    .contact-form textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 4px;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
       border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
     }
-    form button {
-      background-color: #40798C;
-      color: white;
-      padding: 10px 20px;
+    .contact-form button {
+      background: var(--primary-color);
+      color: var(--white);
       border: none;
-      margin-top: 10px;
+      padding: 0.75rem 1.5rem;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
     }
+    .contact-form button:hover {
+      background: var(--accent-color);
+    }
+
+    /* ===== FOOTER ===== */
     footer {
+      background-color: #222;
+      color: var(--white);
       text-align: center;
-      padding: 20px;
-      background: #eee;
-      font-size: 0.9em;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
     <h1>Music For Patients</h1>
-    <p>Bringing comfort and connection through music</p>
+    <p>Bringing comfort & connection through the healing power of music</p>
   </header>
 
-  <section>
-    <h2>Our Mission</h2>
-    <p>Music For Patients is dedicated to uplifting patients by sharing live musical performances that bring hope, joy, and emotional connection during difficult times.</p>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="navbar">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li class="dropdown">
+          <a href="#about">About Us</a>
+          <div class="dropdown-content">
+            <a href="#mission">Our Mission</a>
+            <a href="#team">Our Team</a>
+          </div>
+        </li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HOME SECTION (Can include a Hero Image or Placeholder) -->
+  <section id="home">
+    <div class="placeholder">[Hero Image Placeholder]</div>
   </section>
 
-  <section>
-    <h2>Our Team</h2>
-    <div class="team">
+  <!-- MISSION SECTION -->
+  <section id="mission">
+    <h2 class="section-title">Our Mission</h2>
+    <div class="content">
+      <p>
+        Music For Patients is dedicated to uplifting patients by sharing live musical performances that bring hope, joy, and emotional connection during difficult times.
+      </p>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section id="team">
+    <h2 class="section-title">Our Team</h2>
+    <div class="grid-container">
       <div class="card">
         <h3>J. Gilbert</h3>
         <p>Founder and Musician</p>
       </div>
       <div class="card">
         <h3>Team Member 2</h3>
-        <p>Role</p>
+        <p>Role Description</p>
       </div>
+      <!-- Add more team member cards as needed -->
     </div>
   </section>
 
-  <section>
-    <h2>Testimonials</h2>
-    <div class="testimonials">
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials">
+    <h2 class="section-title">Testimonials</h2>
+    <div class="grid-container">
       <div class="card">
         <p>"Their music brought tears of joy to my mom's eyes. We'll never forget it." – A grateful family</p>
       </div>
       <div class="card">
         <p>"It was the first time I saw my dad smile in weeks. Thank you so much." – Patient's daughter</p>
       </div>
+      <!-- Add more testimonial cards as needed -->
     </div>
   </section>
 
-  <section>
-    <h2>Gallery</h2>
-    <div class="gallery">
-      <img src="image1.jpg" alt="Performance 1" style="width: 100%; border-radius: 8px;" />
-      <img src="image2.jpg" alt="Performance 2" style="width: 100%; border-radius: 8px;" />
+  <!-- GALLERY SECTION -->
+  <section id="gallery">
+    <h2 class="section-title">Gallery</h2>
+    <div class="grid-container">
+      <div class="placeholder">[Image Placeholder]</div>
+      <div class="placeholder">[Image Placeholder]</div>
+      <div class="placeholder">[Image Placeholder]</div>
+      <!-- Add more image placeholders as needed -->
     </div>
   </section>
 
-  <section>
-    <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-form">
+      <form action="https://formspree.io/f/your-form-id" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <p>© 2025 Music For Patients — All rights reserved.</p>
+    <p>&copy; 2025 Music For Patients — All rights reserved.</p>
   </footer>
 
 </body>
